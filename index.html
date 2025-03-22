@@ -10,8 +10,22 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<body style="background-color:white">
+			<style>
+  #bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+  }
+</style>
+
 	</head>
 	<body class="is-preload">
+		<canvas id="bgCanvas"></canvas>
+
 		<!-- Sidebar -->
 			<section id="sidebar">
 				<div class="inner">
@@ -249,6 +263,37 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+<script>
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  let mouseX = width / 2;
+  let mouseY = height / 2;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const gradient = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 300);
+    gradient.addColorStop(0, 'rgba(255, 204, 0, 0.1)');
+    gradient.addColorStop(1, 'rgba(255, 204, 0, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+    requestAnimationFrame(draw);
+  }
+  draw();
+</script>
 
 	</body>
 </html>
