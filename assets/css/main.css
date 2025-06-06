@@ -3908,3 +3908,74 @@ input, select, textarea {
 			}
 
 		}
+
+
+
+		
+
+/* -------------------------------------------------
+   VIDEO WRAPPER + SCROLL CONTAINER
+   ------------------------------------------------- */
+
+/* The outer wrapper: allow buttons to sit outside */
+#video-wrapper {
+	position: relative;
+	margin-top: 2rem;
+	margin-left: 80px;
+	overflow: visible; /* so arrows can overflow outside */
+  }
+  
+  /* The flex container that holds all .video-item slides */
+  #videoScrollContainer {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+	/* REMOVE any left/right padding here so the first slide is truly flush/centered */
+	padding: 0;
+  }
+  
+  /* Each “slide” occupies 100% of the parent’s width */
+  .video-item {
+	flex: 0 0 100%;
+	/* Center the video within each slide if you want a maximum width: */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  /* If your video is narrower than 100%, you can force it to max out at its intrinsic size: */
+  .video-item video {
+	width: 100%;
+	height: 100%;
+	max-width: 1000px; /* ← Optional: limit to 800px if you don’t want it full-bleed */
+	border-radius: 10px;
+  }
+  
+  /* Caption styling */
+  .video-item p {
+	font-size: 14px;
+	text-align: center;
+	margin: 0.5rem 0;
+  }
+  
+  /* -------------------------------------------------
+	 LEFT/RIGHT BUTTONS (outside the container)
+	 ------------------------------------------------- */
+	 #videoScrollContainer {
+		display: flex;
+		flex-wrap: nowrap;
+		overflow-x: auto;            /* allow native scrolling/dragging */
+		scroll-behavior: smooth;     /* smooth animation when snapping */
+		scroll-snap-type: x mandatory; /* ← snap along the x-axis */
+		cursor: grab;
+	  }
+	  
+	  /* Each slide: tell it where to snap */
+	  .video-item {
+		flex: 0 0 100%;
+		scroll-snap-align: start;    /* ← snap so the left edge lines up */
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	  }
