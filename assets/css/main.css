@@ -3921,7 +3921,6 @@ input, select, textarea {
 #video-wrapper {
 	position: relative;
 	margin-top: 2rem;
-	margin-left: 80px;
 	overflow: visible; /* so arrows can overflow outside */
   }
   
